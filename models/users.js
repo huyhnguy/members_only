@@ -5,6 +5,20 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     first_name: { type: String, required: true, maxLength: 100 },
     last_name: { type: String, required: true, maxLength: 100 },
+    username: { 
+        type: String, 
+        required: true,
+        unique: true,
+        lowercase: true,
+        validate: (value) => {
+            return validator.isEmail(value);
+        }
+    },
+    password: { type: String, required: true, maxLength: 100 },
+    membership_status: {
+        type: Boolean,
+        default: false,
+    },
 });
 
 UserSchema.virtual("full_name").get(function () {
