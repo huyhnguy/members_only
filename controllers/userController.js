@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 exports.sign_up_get = asyncHandler(async (req, res, next) => {
     res.render("sign-up", {
         title: "Sign Up Form",
+        errors: undefined,
     });
 });
 

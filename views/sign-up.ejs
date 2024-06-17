@@ -20,5 +20,12 @@
         <input type="text" name="last_name" placeholder="Doe">
         <button type="submit">Submit</button>
     </form>
+    <% if (errors) { %> 
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
 </body>
 </html>
