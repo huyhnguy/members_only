@@ -10,9 +10,6 @@ const UserSchema = new Schema({
         required: true,
         unique: true,
         lowercase: true,
-        validate: (value) => {
-            return validator.isEmail(value);
-        }
     },
     password: { type: String, required: true, maxLength: 100 },
     membership_status: {
