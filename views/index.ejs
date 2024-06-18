@@ -6,18 +6,35 @@
   </head>
   <body>
     <% if (user) { %>
-      <h1>Welcome back, <%= user.full_name %></h1>
-      <a href="/log-out">LOG OUT</a>
+      <section>
+        <h1>Welcome back, <%= user.full_name %></h1>
+        <a href="/create-message">Create a new message</a>
+        <a href="/log-out">LOG OUT</a>
+      </section>
     <% } else { %>
-      <h1>Log In</h1>
-      <form action="/log-in" method="POST">
-          <label for="username">Username</label>
-          <input type="text" name="username" placeholder="email@email.com">
-          <label for="password">Password</label>
-          <input type="password" name="password">
-          <button type="submit">Submit</button>
-      </form>
+      <section>
+        <h1>Log In</h1>
+        <form action="/log-in" method="POST">
+            <label for="username">Username</label>
+            <input type="text" name="username" placeholder="email@email.com">
+            <label for="password">Password</label>
+            <input type="password" name="password">
+            <button type="submit">Submit</button>
+        </form>
+      </section>
     <% } %>
+
+    <main class="message-board">
+      <h1>Message Board</h1>
+      <% messages.forEach((message) => { %>
+        <article class="message">
+          <h2><%= message.title %></h2>
+          <h3>by <%= message.user.full_name %></h3>
+          <h3>Date: <%= message.timestamp_formatted %></h3>
+          <p><%= message.message %></p>
+        </article>
+      <% }) %>
+    </main>
     
   </body>
 </html>

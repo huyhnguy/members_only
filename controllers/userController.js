@@ -1,23 +1,28 @@
 const User = require('../models/user');
+const Message = require('../models/message')
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-exports.index_get = (req, res, next) => {
+exports.index_get = asyncHandler(async (req, res, next) => {
+    const allMessages = await Message.find().populate("user").sort({ date: 1 }).exec();
+    
     if (req.user) {
         res.render("index", {
             title: 'Members Only',
             user: req.user,
+            messages: allMessages,
           })
     } else {
         res.render("index", {
             title: 'Members Only',
             user: undefined,
+            messages: allMessages,
           })
     }
-    
-}
+
+})
 
 exports.sign_up_get = function (req, res, next) {
     res.render("sign-up", {
