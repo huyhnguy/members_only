@@ -3,12 +3,12 @@ const router = express.Router();
 
 const user_controller = require('../controllers/userController');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
+router.get('/', user_controller.index_get);
+
+router.post('/log-in', user_controller.log_in_post);
+router.get('/log-out', user_controller.log_out_get);
 
 router.get('/sign-up', user_controller.sign_up_get);
-router.post('/sign-up', user_controller.sign_up_post)
+router.post('/sign-up', user_controller.sign_up_post);
 
 module.exports = router;

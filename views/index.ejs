@@ -5,7 +5,19 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <% if (user) { %>
+      <h1>Welcome back, <%= user.full_name %></h1>
+      <a href="/log-out">LOG OUT</a>
+    <% } else { %>
+      <h1>Log In</h1>
+      <form action="/log-in" method="POST">
+          <label for="username">Username</label>
+          <input type="text" name="username" placeholder="email@email.com">
+          <label for="password">Password</label>
+          <input type="password" name="password">
+          <button type="submit">Submit</button>
+      </form>
+    <% } %>
+    
   </body>
 </html>

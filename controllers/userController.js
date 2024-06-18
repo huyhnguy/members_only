@@ -2,14 +2,29 @@ const User = require('../models/user');
 const asyncHandler = require('express-async-handler');
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
+const passport = require('passport');
 
+exports.index_get = (req, res, next) => {
+    if (req.user) {
+        res.render("index", {
+            title: 'Members Only',
+            user: req.user,
+          })
+    } else {
+        res.render("index", {
+            title: 'Members Only',
+            user: undefined,
+          })
+    }
+    
+}
 
-exports.sign_up_get = asyncHandler(async (req, res, next) => {
+exports.sign_up_get = function (req, res, next) {
     res.render("sign-up", {
         title: "Sign Up Form",
         errors: undefined,
     });
-});
+};
 
 exports.sign_up_post = [
     body("username", "username required")
@@ -69,3 +84,16 @@ exports.sign_up_post = [
     })
 ];
 
+exports.log_in_post = passport.authenticate("local", {
+    successRedirect: "/",
+    failureRedirect: "/"
+  });
+
+exports.log_out_get = (req, res, next) => {
+    req.logout((err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/');
+    });
+  }
