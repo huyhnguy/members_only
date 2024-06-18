@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 exports.index_get = asyncHandler(async (req, res, next) => {
-    const allMessages = await Message.find().populate("user").sort({ date: 1 }).exec();
+    const allMessages = await Message.find().populate("user").sort({ timestamp: -1 }).exec();
     
     if (req.user) {
         res.render("index", {

@@ -28,9 +28,11 @@
       <h1>Message Board</h1>
       <% messages.forEach((message) => { %>
         <article class="message">
-          <h2><%= message.title %></h2>
-          <h3>by <%= message.user.full_name %></h3>
-          <h3>Date: <%= message.timestamp_formatted %></h3>
+          <header class="header">
+            <h2 class="title"><%= message.title %></h2>
+            <h3 class="name">by <%= message.user.full_name %></h3>
+            <h3 class="date">Date: <%= message.timestamp_formatted %></h3>
+          </header>
           <p><%= message.message %></p>
         </article>
       <% }) %>
