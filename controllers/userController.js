@@ -102,3 +102,37 @@ exports.log_out_get = (req, res, next) => {
       res.redirect('/');
     });
   }
+
+exports.join_club_get = asyncHandler(async (req, res, next) => {
+    res.render('join-club', {
+        errors: undefined,
+    });
+})
+
+exports.join_club_post = [
+    body("code", "code required")
+        .trim()
+        .custom((val) => {
+            if (val !== '1226') {
+                throw new Error('Wrong passcode');
+            }
+            return true;
+        })
+        .escape(),
+    asyncHandler(async (req, res, next) => {
+        const user = await User.findById(req.user._id).exec()
+
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            res.render("join-club", {
+                errors: errors.array(),
+            });
+            return;
+        } else {
+            user.membership_status = true;
+            const result = await user.save();
+            res.redirect('/');
+        }
+    })
+]

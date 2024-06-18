@@ -14,6 +14,8 @@ router.get('/sign-up', user_controller.sign_up_get);
 router.post('/sign-up', user_controller.sign_up_post);
 router.get('/create-message', authMiddleware.isLoggedIn, message_controller.create_message_get);
 router.post('/create-message', authMiddleware.isLoggedIn, message_controller.create_message_post);
+router.get('/join-club', user_controller.join_club_get);
+router.post('/join-club', user_controller.join_club_post);
 
 
 module.exports = router;

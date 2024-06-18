@@ -6,12 +6,12 @@
     <title>Message Board</title>
 </head>
 <body>
-    <h1>Create a new message</h1>
+    <h1>Join the club!</h1>
+    <p>Gain access to see the authors and dates of all journal entries</p>
+    <p>Hint: the passcode is 4 digit code of the month and day of Christmas! MMDD</p>
     <form action="" method="POST">
-        <label for="title">Title</label>
-        <input type="text" name="title">
-        <label for="message">Message</label>
-        <textarea name="message" id="message" cols="50" rows="10"></textarea>
+        <label for="code">Secret Passcode</label>
+        <input type="text" name="code">
         <button type="submit">Submit</button>
     </form>
     <% if (errors) { %> 
