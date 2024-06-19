@@ -10,11 +10,20 @@ const LocalStrategy = require('passport-local').Strategy;
 const mongoose = require("mongoose");
 const User = require('./models/user');
 const bcrypt = require('bcryptjs');
-
+const compression = require('compression');
+const helmet = require('helmet');
 
 const indexRouter = require('./routes/index');
 
 const app = express();
+
+app.use(compression());
+app.use(helmet());
+const RateLimit = require('express-rate-limit');
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, // 1 minute
+  max: 60,
+});
 
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_URL;
