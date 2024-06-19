@@ -5,14 +5,53 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <% if (user) { %>
-      <section>
-        <h1>Welcome back, <%= user.full_name %></h1>
-        <a href="/create-message">Create a new message</a>
-        <a href="/join-club">Join the club</a>
-        <a href="/log-out">LOG OUT</a>
-      </section>
-    <% } else { %>
+    <% if (user) {
+      if (user.membership_status === true) { %>
+        <section>
+          <h1>Welcome back, <%= user.full_name %> (club member)</h1>
+          <a href="/create-message">Create a new message</a>
+          <a href="/log-out">LOG OUT</a>
+        </section>
+        <main>
+          <h1>Message Board</h1>
+          <section class="message-board">
+            <% messages.forEach((message) => { %>
+              <article class="message">
+                <header class="header">
+                  <h2 class="title"><%= message.title %></h2>
+                  <h3 class="name">by <%= message.user.full_name %></h3>
+                  <h3 class="date">Date: <%= message.timestamp_formatted %></h3>
+                </header>
+                <p><%= message.message %></p>
+              </article>
+            <% }) %>
+          </section>
+        </main>
+      <% } else { %>
+        <section>
+          <h1>Welcome back, <%= user.full_name %></h1>
+          <a href="/create-message">Create a new message</a>
+          <a href="/join-club">Join the club</a>
+          <a href="/log-out">LOG OUT</a>
+        </section>
+        <main>
+          <h1>Message Board</h1>
+          <p><strong>Become a member to see authors and dates.</strong></p>
+          <section class="message-board">
+            <% messages.forEach((message) => { %>
+              <article class="message">
+                <header class="header">
+                  <h2 class="title"><%= message.title %></h2>
+                  <h3 class="name">by {redacted}</h3>
+                  <h3 class="date">Date: {redacted}</h3>
+                </header>
+                <p><%= message.message %></p>
+              </article>
+            <% }) %>
+          </section>
+        </main>
+      <% }
+    } else { %>
       <section>
         <h1>Log In</h1>
         <form action="/log-in" method="POST">
@@ -22,22 +61,25 @@
             <input type="password" name="password">
             <button type="submit">Submit</button>
         </form>
+        <a href="sign-up">Sign up</a>
       </section>
+      <main>
+        <h1>Message Board</h1>
+        <p><strong>Sign up to write a message!</strong></p>
+        <p><strong>Become a member to see authors and dates.</strong></p>
+        <section class="message-board">
+          <% messages.forEach((message) => { %>
+            <article class="message">
+              <header class="header">
+                <h2 class="title"><%= message.title %></h2>
+                <h3 class="name">by {redacted}</h3>
+                <h3 class="date">Date: {redacted}</h3>
+              </header>
+              <p><%= message.message %></p>
+            </article>
+          <% }) %>
+        </section>
+      </main>
     <% } %>
-
-    <main class="message-board">
-      <h1>Message Board</h1>
-      <% messages.forEach((message) => { %>
-        <article class="message">
-          <header class="header">
-            <h2 class="title"><%= message.title %></h2>
-            <h3 class="name">by <%= message.user.full_name %></h3>
-            <h3 class="date">Date: <%= message.timestamp_formatted %></h3>
-          </header>
-          <p><%= message.message %></p>
-        </article>
-      <% }) %>
-    </main>
-    
   </body>
 </html>

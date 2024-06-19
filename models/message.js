@@ -13,7 +13,7 @@ const MessageSchema = new Schema({
         required: true,
     },
     title: { type: String, required: true, maxLength: 100 },
-    timestamp: { type: Date, default: DateTime.now() },
+    timestamp: { type: Date, default: Date.now() },
 });
 
 MessageSchema.virtual("timestamp_formatted").get(function () {

@@ -113,7 +113,7 @@ exports.join_club_post = [
     body("code", "code required")
         .trim()
         .custom((val) => {
-            if (val !== '1226') {
+            if (val !== '1225') {
                 throw new Error('Wrong passcode');
             }
             return true;
