@@ -50,7 +50,8 @@ a {
   justify-self: end;
 }
 
-.sign-up-form {
+.sign-up-form, 
+.create-message-form {
   display:inline-grid;
   grid-template-columns: min-content minmax(75px, 500px);
   gap: 1rem;
@@ -59,8 +60,15 @@ a {
   padding: 10px;
 }
 
-.sign-up-form button {
+.sign-up-form button,
+.create-message-form button {
   grid-column: 1 / span 2;
   justify-self: center;
 }
+
+.log-in-form {
+  display: flex;
+  gap: 10px;
+}
+
 
