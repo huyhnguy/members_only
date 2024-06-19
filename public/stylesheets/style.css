@@ -40,3 +40,13 @@ a {
 .title {
   grid-area: title;
 }
+
+.delete {
+  width: fit-content;
+  height: fit-content;
+}
+
+.delete-form {
+  justify-self: end;
+
+}

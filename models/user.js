@@ -16,6 +16,10 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false,
     },
+    admin: {
+        type: Boolean,
+        default: false,
+    }
 });
 
 UserSchema.virtual("full_name").get(function () {

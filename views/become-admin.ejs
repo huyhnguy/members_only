@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Message Board</title>
+</head>
+<body>
+    <h1>Become an admin!</h1>
+    <p>Gain the ability to delete messages.</p>
+    <p>Hint: the passcode is the first 4 letters of the alphabet (lowercase)</p>
+    <form action="" method="POST">
+        <label for="code">Secret Passcode</label>
+        <input type="text" name="code">
+        <button type="submit">Submit</button>
+    </form>
+    <% if (errors) { %> 
+        <ul>
+            <% errors.forEach((error) => { %>
+                <li><%= error.msg %></li>
+            <% }) %>
+        </ul>
+    <% } %>
+</body>
+</html>

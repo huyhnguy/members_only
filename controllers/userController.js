@@ -7,7 +7,6 @@ const passport = require('passport');
 
 exports.index_get = asyncHandler(async (req, res, next) => {
     const allMessages = await Message.find().populate("user").sort({ timestamp: -1 }).exec();
-    
     if (req.user) {
         res.render("index", {
             title: 'Members Only',
@@ -92,7 +91,7 @@ exports.sign_up_post = [
 exports.log_in_post = passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/"
-  });
+});
 
 exports.log_out_get = (req, res, next) => {
     req.logout((err) => {
@@ -131,6 +130,40 @@ exports.join_club_post = [
             return;
         } else {
             user.membership_status = true;
+            const result = await user.save();
+            res.redirect('/');
+        }
+    })
+]
+
+exports.become_admin_get = asyncHandler(async (req, res, next) => {
+    res.render('become-admin', {
+        errors: undefined,
+    });
+});
+
+exports.become_admin_post = [
+    body("code", "code required")
+        .trim()
+        .custom((val) => {
+            if (val !== 'abcd') {
+                throw new Error('Wrong passcode');
+            }
+            return true;
+        })
+        .escape(),
+    asyncHandler(async (req, res, next) => {
+        const user = await User.findById(req.user._id).exec()
+
+        const errors = validationResult(req)
+
+        if (!errors.isEmpty()) {
+            res.render("become-admin", {
+                errors: errors.array(),
+            });
+            return;
+        } else {
+            user.admin = true;
             const result = await user.save();
             res.redirect('/');
         }
