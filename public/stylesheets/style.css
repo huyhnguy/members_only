@@ -48,5 +48,19 @@ a {
 
 .delete-form {
   justify-self: end;
-
 }
+
+.sign-up-form {
+  display:inline-grid;
+  grid-template-columns: min-content minmax(75px, 500px);
+  gap: 1rem;
+  border-radius: 10px;
+  border: solid;
+  padding: 10px;
+}
+
+.sign-up-form button {
+  grid-column: 1 / span 2;
+  justify-self: center;
+}
+
