@@ -2,7 +2,7 @@
 ![Screenshot of page](/public/images/Screenshot%202024-06-19%20at%2010.19.43 PM.png "visual of page")
 
 ## Description
-This project shows a message board with levels of accessibility based on the type of user that is browsing the page. Users must sign up to post messages on the board. Users have to input a passcode to become a member and see the authors and dates of each post. Users have to input another passcode to become an admin and gain the ability to delete posts.
+This project shows a message board with levels of accessibility based on the type of user that is browsing the page. Regular users can post messages and view the message board but they can't see the authors or dates of any message. Users who are members can see the authors and dates of every message. Admins have the ability to delete messages. Viewers must sign up and log in to become a regular user, input the right passcode to become a member, and another passcode to be an admin.
 
 ## Passcodes For The Site
 * Passcode to be a member: 1226
