@@ -24,6 +24,7 @@ const limiter = RateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 60,
 });
+app.use(limiter);
 
 mongoose.set("strictQuery", false);
 const mongoDB = process.env.MONGODB_URL;
